@@ -1,0 +1,61 @@
+# ========================================
+# DXVK Ultra Performance
+# AMD CPU + AMD GPU (RX 7000 / 6000 Serisi)
+# ========================================
+
+# ---------- D3D9 Özel Ayarları ----------
+d3d9.maxFrameRate = 0                # FPS kilidi yok
+d3d9.presentInterval = 0             # VSync kapalı, minimum input lag
+d3d9.floatEmulation = strict         # Stabilite artırır
+d3d9.evictManagedOnUnlock = True     # VRAM optimizasyonu
+d3d9.memoryTrackTest = False
+d3d9.numBackBuffers = 1              # Input lag düşürür
+d3d9.relaxedBarriers = True          # AMD GPU için CPU-GPU senkronizasyonunu azaltır
+d3d9.deferSurfaceCreation = True     # Gereksiz yüzeyleri başta yaratmaz, performans artar
+
+# ---------- CPU & Shader Ayarları ----------
+dxvk.enableCSMT = True                     # Çok çekirdekli rendering
+dxvk.numCompilerThreads = 16               # Ryzen 7/9 serisi için ideal
+dxvk.enableAsyncShaderCompilation = True   # Shader'ları arka planda derle
+dxvk.enableAsyncPipelineCompilation = True
+dxvk.useDeferredPipelineCreation = True    # Shader yüklenirken stutter önler
+
+# ---------- Pipeline & Cache ----------
+dxvk.enableStateCache = True
+dxvk.stateCache = dxvk-cache
+dxvk.pipelineCache = dxvk-pipeline
+dxvk.pipelineCreationCacheControl = True
+dxvk.enableGraphicsPipelineLibrary = True  # Pipeline önbelleğini optimize eder
+dxvk.shaderDemoteToHelperInvocation = True
+
+# ---------- Bellek & Descriptor ----------
+dxvk.descriptorIndexing = True
+dxvk.bufferDeviceAddress = True
+dxvk.allowDynamicResources = True
+dxvk.allowIndirectRendering = True
+dxvk.maxDescriptorSetSize = 128
+dxvk.maxAvailableMemory = 0                # Tüm VRAM erişimi
+
+# ---------- Rendering Optimizasyonu ----------
+dxvk.enableZeroInitializeWorkgroupMemory = True
+dxvk.allowTiling = True
+dxvk.enableAsyncPresent = True
+dxvk.enableAsyncCompute = True
+dxvk.useRawSsbo = True                     # AMD GPU için daha hızlı bellek erişimi
+dxvk.useRawUav = True                      # AMD compute shader performansını artırır
+
+# ---------- FPS & Senkronizasyon ----------
+dxgi.syncInterval = 0                      # VSync kapalı
+dxgi.maxFrameLatency = 1                   # Minimum input lag
+dxvk.fpsCap = 0                            # FPS sınırlaması yok
+dxvk.enableAdaptiveSync = True             # FreeSync desteğini açar (AMD için önerilir)
+
+# ---------- NVIDIA Ayarları (AMD'de kapalı) ----------
+dxvk.enableNvapi = False
+dxvk.nvapiHack = False
+
+# ---------- HUD & Debug ----------
+dxgi.hud = off
+dxgi.showFps = 0
+dxgi.showDevice = 0
+dxgi.showFrameTime = 0
