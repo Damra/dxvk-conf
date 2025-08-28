@@ -1,0 +1,59 @@
+# ========================================
+# DXVK Ultra Performance
+# RTX 4090 + i9-14900KS
+# ========================================
+
+# ---------- D3D9 Özel Ayarları ----------
+d3d9.maxFrameRate = 0                # FPS kilidi yok
+d3d9.presentInterval = 0             # VSync tamamen kapalı
+d3d9.floatEmulation = strict         # Stabilite artırır
+d3d9.evictManagedOnUnlock = True     # VRAM optimizasyonu
+d3d9.memoryTrackTest = False
+d3d9.numBackBuffers = 1              # Düşük input lag
+
+# ---------- CPU & Shader Ayarları ----------
+dxvk.enableCSMT = True                     # Çok çekirdekli rendering
+dxvk.numCompilerThreads = 24               # i9-14900KS için uygun
+dxvk.enableAsyncShaderCompilation = True   # Shader'ları arka planda derler
+dxvk.enableAsyncPipelineCompilation = True
+dxvk.useDeferredPipelineCreation = True    # Shader yüklenirken stutter önler
+
+# ---------- Pipeline & Cache ----------
+dxvk.enableStateCache = True
+dxvk.stateCache = dxvk-cache
+dxvk.pipelineCache = dxvk-pipeline
+dxvk.pipelineCreationCacheControl = True
+
+# ---------- Bellek & Descriptor ----------
+dxvk.descriptorIndexing = True
+dxvk.bufferDeviceAddress = True
+dxvk.allowDynamicResources = True
+dxvk.allowIndirectRendering = True
+dxvk.maxDescriptorSetSize = 128
+dxvk.maxAvailableMemory = 0                # Tüm VRAM erişimi
+
+# ---------- Rendering Optimizasyonu ----------
+dxvk.enableGraphicsPipelineLibrary = True
+dxvk.shaderDemoteToHelperInvocation = True
+dxvk.enableZeroInitializeWorkgroupMemory = True
+dxvk.allowTiling = True
+dxvk.enableAsyncPresent = True
+dxvk.enableAsyncCompute = True
+
+# ---------- FPS & Senkronizasyon ----------
+dxgi.syncInterval = 0                      # VSync kapalı
+dxgi.maxFrameLatency = 1                   # Minimum input lag
+dxvk.fpsCap = 0                            # FPS sınırlaması yok
+
+# ---------- NVIDIA Özel Ayarları ----------
+dxvk.enableNvapi = True
+dxvk.nvapiHack = False
+dxvk.nvapi.driverVersion = 555             # RTX 4090 için en stabil sürüm
+dxvk.lowLatency = True                     # NVIDIA Reflex benzeri düşük gecikme
+dxvk.lowLatencyBoost = True
+
+# ---------- HUD & Debug ----------
+dxgi.hud = off
+dxgi.showFps = 0
+dxgi.showDevice = 0
+dxgi.showFrameTime = 0
