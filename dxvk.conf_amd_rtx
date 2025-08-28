@@ -1,0 +1,32 @@
+# ============================
+# DXVK Ultra FPS Config
+# RTX 3050 + AMD CPU Optimize
+# ============================
+
+# === DX9 ayarları ===
+d3d9.maxFrameLatency = 1              # Minimum input lag için frame latency düşürülür
+d3d9.presentInterval = 0              # V-Sync tamamen kapalı
+d3d9.numBackBuffers = 2               # Daha az back buffer, daha düşük gecikme
+d3d9.deferSurfaceCreation = True      # Eski DX9 oyunlarda stutter azaltır
+d3d9.allowDirectBufferMapping = True  # Bellek kopyalama overhead'ini azaltır
+d3d9.evictManagedOnUnlock = True      # VRAM yönetimini optimize eder
+d3d9.deviceLocalMemory = True         # Daha iyi VRAM kullanımı
+
+# === FPS Limiti ===
+dxgi.numBackBuffers = 2
+dxgi.syncInterval = 0
+dxgi.maxFrameRate = 0                 # 0 = limitsiz FPS (kapatmak istemezsen FPS yaz)
+
+# === Shader & Pipeline ===
+dxvk.enableAsync = True               # Shader async derleme açık (stutter azaltır)
+dxvk.enableAsyncPresentation = True   # Present queue async
+dxvk.enableAsyncPipelineCache = True  # Shader cache pipeline optimize
+
+# === Memory ve VRAM optimizasyonu ===
+dxvk.memoryTrackers = True
+dxvk.memoryHeap = device
+dxvk.useAsyncCompute = True           # RTX 3050 için async compute açık
+dxvk.numCompilerThreads = 8           # 8 thread shader derleme (AMD CPU için optimize)
+
+# === HUD kapalı ===
+dxvk.hud = 0                          # DXVK overlay tamamen kapalı
